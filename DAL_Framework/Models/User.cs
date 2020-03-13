@@ -32,13 +32,22 @@ namespace DAL_Framework.Models
 			set { _pwd = value; }
 		}
 
-		private string _role;
+		private bool _isActive;
 
-		public string Role
+		public bool IsActive
 		{
-			get { return _role; }
-			set { _role = value; }
+			get { return _isActive; }
+			set { _isActive = value; }
 		}
+
+		private bool _isAdmin;
+
+		public bool IsAdmin
+		{
+			get { return _isAdmin; }
+			set { _isAdmin = value; }
+		}
+
 
 
 

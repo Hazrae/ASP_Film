@@ -1,31 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dal = DAL_Framework.Models;
-using Local = ModelClient.Models;
+using System.Web;
+using Global = ModelClient.Models;
+using View = ASP_FIrst.Models;
 
-namespace ModelClient.Utils
+namespace ASP_FIrst.Utils
 {
     public static class MapperUser
     {
-        public static Local.User ToLocal(this Dal.User u)
+        public static Global.User ToGlobal(this View.UserSignup u)
         {
-            return new Local.User
+            return new Global.User
             {
-                ID = u.ID,
                 Login = u.Login,
                 Pwd = u.Pwd,
                 IsActive = u.IsActive,
                 IsAdmin = u.IsAdmin
-               
             };
         }
 
-        public static Dal.User ToGlobal(this Local.User u)
+        public static View.UserSignup ToLocal(this Global.User u)
         {
-            return new Dal.User
+            return new View.UserSignup
             {
                 ID = u.ID,
                 Login = u.Login,

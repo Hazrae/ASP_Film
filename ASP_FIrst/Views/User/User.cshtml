@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ASP_FIrst.Models.UserSignup>
+
+@{
+    ViewBag.Title = "User";
+
+}
+
+<h2>User</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAdmin)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAdmin)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UserEdit", new { id=item.ID })
+            @Html.ActionLink("Delete", "DeleteUser", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

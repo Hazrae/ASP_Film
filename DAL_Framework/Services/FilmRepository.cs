@@ -24,7 +24,7 @@ namespace DAL_Framework.Services
             //Creation de l'objet commande
             using (SqlCommand cmd = connec.CreateCommand())
             {
-                string command = "Insert into Film (titre,acteurPrincipal,realisateur,anneeDeSortie) values (@titre,@acteur,@real,@annee)";
+                string command = "Insert into Film (titre,Acteur,Real,anneeDeSortie) values (@titre,@acteur,@real,@annee)";
 
                 //Parametres
                 SqlParameter PTitre = new SqlParameter("titre", f.Titre);
@@ -71,9 +71,9 @@ namespace DAL_Framework.Services
                         l.Add(new Film
                         {
                             ID = (int)dr["iDFilm"],
-                            Titre = dr["titre"].ToString(),
-                            ActeurPrincipal = dr["acteurPrincipal"].ToString(),
-                            Realisateur = dr["realisateur"].ToString(),
+                            Titre = dr["Titre"].ToString(),
+                            ActeurPrincipal = dr["Acteur"].ToString(),
+                            Realisateur = dr["Real"].ToString(),
                             AnneeDeSortie = (int)dr["anneeDeSortie"]
                         });
                     }
@@ -102,8 +102,8 @@ namespace DAL_Framework.Services
                     dr.Read();
                     f.ID = (int)dr["iDFilm"];
                     f.Titre = dr["titre"].ToString();
-                    f.ActeurPrincipal = dr["acteurPrincipal"].ToString();
-                    f.Realisateur = dr["realisateur"].ToString();
+                    f.ActeurPrincipal = dr["Acteur"].ToString();
+                    f.Realisateur = dr["Real"].ToString();
                     f.AnneeDeSortie = (int)dr["anneeDeSortie"];
 
                     connec.Close();
@@ -132,7 +132,7 @@ namespace DAL_Framework.Services
             //Creation de l'objet commande
             using (SqlCommand cmd = connec.CreateCommand())
             {
-                string command = "UPDATE Film SET titre = @titre, acteurPrincipal = @acteur, realisateur = @real, anneeDeSortie = @annee WHERE iDFilm = @id";
+                string command = "UPDATE Film SET titre = @titre, Acteur = @acteur, Real = @real, anneeDeSortie = @annee WHERE iDFilm = @id";
                 
                 //Parametres
                 SqlParameter PTitre = new SqlParameter("titre", f.Titre);

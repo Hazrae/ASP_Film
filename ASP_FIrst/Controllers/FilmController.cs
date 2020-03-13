@@ -14,9 +14,7 @@ namespace ASP_FIrst.Controllers
         // GET: Film
         public ActionResult Film()
         {
-            FilmService fs = new FilmService();
-
-            return View(fs.GetAll());
+           return View(fs.GetAll());
         }
 
         [HttpGet]

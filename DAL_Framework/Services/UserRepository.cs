@@ -20,20 +20,17 @@ namespace DAL_Framework.Services
         {
             using (SqlCommand cmd = connec.CreateCommand())
             {
-                string command = "Insert into [User] ([Login],[Password],[Role]) values (@log,@pwd,@role)";
+                string command = "Insert into [User] ([Login],[Password]) values (@log,@pwd)";
 
                 //Parametres
                 SqlParameter PLogin = new SqlParameter("log", u.Login);
-                SqlParameter PPwd = new SqlParameter("pwd", u.Pwd);
-                SqlParameter PRole = new SqlParameter("role", u.Role);
+                SqlParameter PPwd = new SqlParameter("pwd", u.Pwd);               
 
                 //construction de la cmd
                 cmd.CommandText = command;
                 cmd.Parameters.Add(PLogin);
                 cmd.Parameters.Add(PPwd);
-                cmd.Parameters.Add(PRole);
-              
-
+               
                 //exec
                 connec.Open();
                 cmd.ExecuteScalar();
@@ -76,7 +73,8 @@ namespace DAL_Framework.Services
                             ID = (int)dr["IdUser"],
                             Login = dr["Login"].ToString(),
                             Pwd = dr["Password"].ToString(),
-                            Role = dr["Role"].ToString()
+                            IsActive = (bool)dr["isActive"],
+                            IsAdmin = (bool)dr["isAdmin"]
                         });
                     }
                 }
@@ -103,7 +101,8 @@ namespace DAL_Framework.Services
                     u.ID = (int)dr["IdUser"];
                     u.Login = dr["Login"].ToString();
                     u.Pwd = dr["Password"].ToString();
-                    u.Role = dr["Role"].ToString();
+                    u.IsActive = (bool)dr["isActive"];
+                    u.IsAdmin = (bool)dr["isAdmin"];
 
                     connec.Close();
                     return u;
@@ -116,19 +115,46 @@ namespace DAL_Framework.Services
             //Creation de l'objet commande
             using (SqlCommand cmd = connec.CreateCommand())
             {
-                string command = "UPDATE [User] SET [Login] = @login, [Password] = @pwd, [Role] = @role WHERE IdUser = @id";
+                string command = "UPDATE [User] SET [Login] = @login, [Password] = @pwd, isActive = @actif, isAdmin = @admin WHERE IdUser = @id";
 
                 //Parametres
                 SqlParameter PLogin = new SqlParameter("login", u.Login);
                 SqlParameter PPwd = new SqlParameter("pwd", u.Pwd);
-                SqlParameter PRole = new SqlParameter("role", u.Role);
+                SqlParameter PActive = new SqlParameter("actif", u.IsActive);
+                SqlParameter PAdmin = new SqlParameter("admin", u.IsAdmin);
                 cmd.Parameters.AddWithValue("id", u.ID);
 
                 //construction de la cmd
                 cmd.CommandText = command;
                 cmd.Parameters.Add(PLogin);
                 cmd.Parameters.Add(PPwd);
-                cmd.Parameters.Add(PRole);
+                cmd.Parameters.Add(PActive);
+                cmd.Parameters.Add(PAdmin);
+
+                //exec
+                connec.Open();
+                cmd.ExecuteScalar();
+                connec.Close();
+
+            }
+        }
+
+        public void UpdateDroits(User u)
+        {
+            //Creation de l'objet commande
+            using (SqlCommand cmd = connec.CreateCommand())
+            {
+                string command = "UPDATE [User] SET isActive = @actif, isAdmin = @admin WHERE IdUser = @id";
+
+                //Parametres
+                SqlParameter PActive = new SqlParameter("actif", u.IsActive);
+                SqlParameter PAdmin = new SqlParameter("admin", u.IsAdmin);
+                cmd.Parameters.AddWithValue("id", u.ID);
+
+                //construction de la cmd
+                cmd.CommandText = command;
+                cmd.Parameters.Add(PActive);
+                cmd.Parameters.Add(PAdmin);
 
                 //exec
                 connec.Open();

@@ -129,6 +129,7 @@
     <Compile Include="Models\UserSignup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\CustomHelper.cs" />
+    <Compile Include="Utils\MapperUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -170,10 +171,12 @@
     <Content Include="Views\Film\Film.cshtml" />
     <Content Include="Views\Film\Update.cshtml" />
     <Content Include="Views\User\UserAdd.cshtml" />
+    <Content Include="Views\User\User.cshtml" />
+    <Content Include="Views\User\UserEdit.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

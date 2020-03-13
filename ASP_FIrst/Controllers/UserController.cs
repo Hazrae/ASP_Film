@@ -1,4 +1,5 @@
 ﻿using ASP_FIrst.Models;
+using ASP_FIrst.Utils;
 using ModelClient.Services;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace ASP_FIrst.Controllers
 {
     public class UserController : Controller
     {
-        FilmService fs = new FilmService();
+        UserService us = new UserService();
 
         // GET: User
         public ActionResult Index()
@@ -18,16 +19,51 @@ namespace ASP_FIrst.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult AddUser()
+        public ActionResult User()
         {
-            return View(new UserSignup());
+            return View(us.GetAll().Select(u=>u.ToLocal()));
         }
 
-        public ActionResult AddUser(UserSignup u)
-        {
-            fs.Create(u);
-            return View();
+        [HttpGet]
+        public ActionResult UserAdd()
+        {          
+                return View(new UserSignup());
         }
+
+        public ActionResult UserAdd(UserSignup u) 
+        {
+            if (ModelState.IsValid)
+            {
+                us.Create(u.ToGlobal());
+                return RedirectToAction("Index","Home");
+                
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult DeleteUser(int id)
+        {
+            us.Delete(id);
+            return RedirectToAction("User");
+        }
+
+        [HttpGet]
+        public ActionResult UserEdit(int id)
+        {
+           UserSignup u = us.GetOne(id).ToLocal();
+            return View(u);
+        }
+
+        public ActionResult UserEdit(UserSignup u)
+        {
+            us.UpdateDroits(u.ToGlobal());
+            return RedirectToAction("User");
+        }
+
+       
+
     }
 }

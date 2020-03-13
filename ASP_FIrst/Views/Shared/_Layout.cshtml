@@ -24,7 +24,18 @@
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Liste de films", "Film", "Home")</li>
+                    <li>@Html.ActionLink("Liste de films", "Film", "Film")</li>
+                    <li>@Html.ActionLink("Inscription", "UserAdd", "User")</li>
+                    <li>@Html.ActionLink("Administration", "User", "User")</li>
+                    @{ if (Session["Actif"] != "True")
+                        {
+                            <li>@Html.ActionLink("Connexion", "Login", "Home")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Deconnexion", "Deconnexion", "Home")</li>
+                        }
+                     }
                 </ul>
             </div>
         </div>

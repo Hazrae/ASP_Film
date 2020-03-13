@@ -13,7 +13,7 @@ namespace ModelClient.Services
 {
     public class UserService : IRepository<User>
     {
-        UserRepository dalInstance;
+        UserRepository dalInstance = new UserRepository();
 
         public void Create(User u)
         {
@@ -38,6 +38,10 @@ namespace ModelClient.Services
         public void Update(User u)
         {
             dalInstance.Update(u.ToGlobal());
+        }
+        public void UpdateDroits(User u)
+        {
+            dalInstance.UpdateDroits(u.ToGlobal());
         }
     }
 }
